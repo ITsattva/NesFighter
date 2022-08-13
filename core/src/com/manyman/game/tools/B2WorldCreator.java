@@ -47,6 +47,8 @@ public class B2WorldCreator {
 
             shape.setAsBox(rect.getWidth() / 2 / ManymanGame.PPM, rect.getHeight() / 2 / ManymanGame.PPM);
             fdef.shape = shape;
+            fdef.filter.categoryBits = ManymanGame.OBJECT_BIT;
+
             body.createFixture(fdef);
         }
 

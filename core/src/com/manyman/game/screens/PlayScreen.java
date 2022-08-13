@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.manyman.game.ManymanGame;
 import com.manyman.game.scenes.Hud;
+import com.manyman.game.sprites.Goomba;
 import com.manyman.game.sprites.Mario;
 import com.manyman.game.tools.B2WorldCreator;
 import com.manyman.game.tools.WorldContactListener;
@@ -44,6 +45,7 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Mario player;
+    private Goomba goomba;
     private Music music;
 
     public PlayScreen(ManymanGame game) {
@@ -67,7 +69,7 @@ public class PlayScreen implements Screen {
 
         new B2WorldCreator(this);
 
-        player = new Mario(world, this);
+        player = new Mario(this);
 
         world.setContactListener(new WorldContactListener());
 
@@ -75,6 +77,8 @@ public class PlayScreen implements Screen {
         music.setLooping(true);
         music.setVolume(0.5f);
         music.play();
+
+        goomba = new Goomba(this, .32f, .32f);
     }
 
     public TextureAtlas getAtlas(){
@@ -108,7 +112,10 @@ public class PlayScreen implements Screen {
         handleInput(dt);
 
         world.step(1 / 60f, 6, 2);
+
+
         player.update(dt);
+        goomba.update(dt);
         hud.update(dt);
 
         gamecam.position.x = player.b2body.getPosition().x;
@@ -134,9 +141,8 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
+        goomba.draw(game.batch);
         game.batch.end();
-
-
 
         hud.stage.draw();
     }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -27,9 +26,9 @@ public class Mario extends Sprite {
     private float stateTimer;
     private boolean runningRight;
 
-    public Mario(World world, PlayScreen screen) {
+    public Mario(PlayScreen screen) {
         super(screen.getAtlas().findRegion("little_mario"));
-        this.world = world;
+        this.world = screen.getWorld();
 
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -115,7 +114,11 @@ public class Mario extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / ManymanGame.PPM);
         fdef.filter.categoryBits = ManymanGame.MARIO_BIT;
-        fdef.filter.maskBits = ManymanGame.DEFAULT_BIT | ManymanGame.COIN_BIT | ManymanGame.BRICK_BIT;
+        fdef.filter.maskBits = ManymanGame.GROUND_BIT |
+                ManymanGame.COIN_BIT |
+                ManymanGame.ENEMY_BIT |
+                ManymanGame.OBJECT_BIT |
+                ManymanGame.BRICK_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
