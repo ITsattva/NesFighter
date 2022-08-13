@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -26,9 +27,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.manyman.game.ManymanGame;
 import com.manyman.game.scenes.Hud;
 import com.manyman.game.sprites.Mario;
+import com.manyman.game.tools.B2WorldCreator;
 
 public class PlayScreen implements Screen {
     private ManymanGame game;
+    private TextureAtlas atlas;
+
     private Hud hud;
     public OrthographicCamera gamecam;
     public Viewport gamePort;
@@ -41,6 +45,8 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen(ManymanGame game) {
+        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+
         this.game = game;
         gamecam = new OrthographicCamera();
 
@@ -54,67 +60,17 @@ public class PlayScreen implements Screen {
 
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        player = new Mario(world);
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
+        new B2WorldCreator(world, map);
 
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+        player = new Mario(world, this);
 
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / ManymanGame.PPM, (rect.getY() + rect.getHeight() / 2) / ManymanGame.PPM);
+    }
 
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / ManymanGame.PPM, rect.getHeight() / 2 / ManymanGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / ManymanGame.PPM, (rect.getY() + rect.getHeight() / 2) / ManymanGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / ManymanGame.PPM, rect.getHeight() / 2 / ManymanGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / ManymanGame.PPM, (rect.getY() + rect.getHeight() / 2) / ManymanGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / ManymanGame.PPM, rect.getHeight() / 2 / ManymanGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / ManymanGame.PPM, (rect.getY() + rect.getHeight() / 2) / ManymanGame.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / ManymanGame.PPM, rect.getHeight() / 2 / ManymanGame.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
+    public TextureAtlas getAtlas(){
+        return atlas;
     }
 
     @Override
@@ -136,6 +92,7 @@ public class PlayScreen implements Screen {
         handleInput(dt);
 
         world.step(1 / 60f, 6, 2);
+        player.update(dt);
 
         gamecam.position.x = player.b2body.getPosition().x;
 
@@ -156,7 +113,14 @@ public class PlayScreen implements Screen {
 
         b2dr.render(world, gamecam.combined);
 
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        //game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
+
+
+
         hud.stage.draw();
     }
 
@@ -182,6 +146,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+        hud.dispose();
     }
 }
