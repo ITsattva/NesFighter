@@ -3,6 +3,7 @@ package com.manyman.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +29,7 @@ import com.manyman.game.ManymanGame;
 import com.manyman.game.scenes.Hud;
 import com.manyman.game.sprites.Mario;
 import com.manyman.game.tools.B2WorldCreator;
+import com.manyman.game.tools.WorldContactListener;
 
 public class PlayScreen implements Screen {
     private ManymanGame game;
@@ -42,7 +44,7 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Mario player;
-
+    private Music music;
 
     public PlayScreen(ManymanGame game) {
         atlas = new TextureAtlas("Mario_and_Enemies.pack");
@@ -63,10 +65,16 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2WorldCreator(world, map);
+        new B2WorldCreator(this);
 
         player = new Mario(world, this);
 
+        world.setContactListener(new WorldContactListener());
+
+        music = ManymanGame.manager.get("music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.5f);
+        music.play();
     }
 
     public TextureAtlas getAtlas(){
@@ -76,6 +84,14 @@ public class PlayScreen implements Screen {
     @Override
     public void show() {
 
+    }
+
+    public TiledMap getMap(){
+        return map;
+    }
+
+    public World getWorld(){
+        return world;
     }
 
     private void handleInput(float dt) {
@@ -93,6 +109,7 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
         player.update(dt);
+        hud.update(dt);
 
         gamecam.position.x = player.b2body.getPosition().x;
 
