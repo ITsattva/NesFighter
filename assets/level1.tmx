@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="19">
+ <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
+  <image source="tileset_gutter.png" width="594" height="504"/>
+ </tileset>
+ <layer id="1" name="background" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7Ay/4bqrir2JZBeUlVVVVVVVVVVVVVV1ccDxULniQ==
+  </data>
+ </layer>
+ <layer id="2" name="graphics" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt2MENgkAARNFZuHuwF7UI7UDoQDpQOrEztRFBnbNsAhFEgv8lE0JINnv5FyQAAAAAfV0S6erdks/P2KdS5uXpcPcC0K52tw/v2dLvPUiVV4fmt6O7PXkl/QKT1LVzAAAA4J8svPPbE8A8bYO0i/zTAjB9B7db0C8wupW7W3ubEH/vgn6B71v+aAD6ewHD8BVL
+  </data>
+ </layer>
+ <objectgroup id="3" name="ground">
+  <object id="7" x="0" y="192" width="480" height="16"/>
+ </objectgroup>
+ <objectgroup id="4" name="pipes">
+  <object id="11" x="352" y="144" width="32" height="48"/>
+ </objectgroup>
+ <objectgroup id="5" name="coins">
+  <object id="14" x="208" y="127.5" width="15.5" height="15.5"/>
+  <object id="15" x="176.5" y="128.5" width="14.5" height="14.5"/>
+ </objectgroup>
+ <objectgroup id="6" name="bricks">
+  <object id="16" x="161" y="128" width="15" height="15"/>
+  <object id="17" x="192" y="128.5" width="15" height="15"/>
+  <object id="18" x="224.5" y="128" width="15.5" height="15.5"/>
+ </objectgroup>
+</map>
