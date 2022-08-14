@@ -16,6 +16,7 @@ public class ManymanGame extends Game {
 	public static final float V_HEIGHT = 208;
 	public static final float PPM = 100;
 
+	public static final short NOTHING_BIT = 0;
 	public static final short GROUND_BIT = 1;
 	public static final short MARIO_BIT = 2;
 	public static final short BRICK_BIT = 4;
@@ -39,6 +40,9 @@ public class ManymanGame extends Game {
 		manager.load("sounds/powerup_spawn.wav", Sound.class);
 		manager.load("sounds/powerup.wav", Sound.class);
 		manager.load("sounds/sounds_breakblock.wav", Sound.class);
+		manager.load("sounds/powerdown.wav", Sound.class);
+		manager.load("sounds/stomp.wav", Sound.class);
+		manager.load("sounds/mariodie.wav", Sound.class);
 		manager.finishLoading();
 
 		setScreen(new PlayScreen(this));
