@@ -118,6 +118,7 @@ public class Mario extends Sprite {
                 ManymanGame.COIN_BIT |
                 ManymanGame.ENEMY_BIT |
                 ManymanGame.OBJECT_BIT |
+                ManymanGame.ENEMY_HEAD_BIT |
                 ManymanGame.BRICK_BIT;
 
         fdef.shape = shape;

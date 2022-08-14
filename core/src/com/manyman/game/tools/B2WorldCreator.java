@@ -9,12 +9,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.manyman.game.ManymanGame;
 import com.manyman.game.screens.PlayScreen;
-import com.manyman.game.sprites.Brick;
-import com.manyman.game.sprites.Coin;
+import com.manyman.game.sprites.tileobjects.Brick;
+import com.manyman.game.sprites.tileobjects.Coin;
+import com.manyman.game.sprites.enemies.Goomba;
 
 public class B2WorldCreator {
+    private Array<Goomba> goombas;
 
     public B2WorldCreator(PlayScreen screen) {
         World world = screen.getWorld();
@@ -60,8 +63,18 @@ public class B2WorldCreator {
 
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
             new Coin(screen, rect);
         }
+
+        //create Goombas
+        goombas = new Array<>();
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            goombas.add(new Goomba(screen, rect.getX() / ManymanGame.PPM, rect.getY() / ManymanGame.PPM));
+        }
+    }
+
+    public Array<Goomba> getGoombas() {
+        return goombas;
     }
 }

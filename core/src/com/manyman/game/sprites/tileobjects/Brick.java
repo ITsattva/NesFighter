@@ -1,10 +1,8 @@
-package com.manyman.game.sprites;
+package com.manyman.game.sprites.tileobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.manyman.game.ManymanGame;
 import com.manyman.game.scenes.Hud;
 import com.manyman.game.screens.PlayScreen;

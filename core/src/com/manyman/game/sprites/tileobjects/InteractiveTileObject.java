@@ -1,4 +1,4 @@
-package com.manyman.game.sprites;
+package com.manyman.game.sprites.tileobjects;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -19,9 +19,12 @@ public abstract class InteractiveTileObject {
     protected TiledMap tile;
     protected Rectangle bounds;
     protected Body body;
+
     protected Fixture fixture;
+    protected PlayScreen screen;
 
     public InteractiveTileObject(PlayScreen screen, Rectangle bounds) {
+        this.screen = screen;
         this.world = screen.getWorld();
         this.map = screen.getMap();
         this.bounds = bounds;
