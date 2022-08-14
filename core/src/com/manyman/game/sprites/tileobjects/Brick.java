@@ -2,14 +2,15 @@ package com.manyman.game.sprites.tileobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.manyman.game.ManymanGame;
 import com.manyman.game.scenes.Hud;
 import com.manyman.game.screens.PlayScreen;
 
 public class Brick extends InteractiveTileObject{
-    public Brick(PlayScreen screen, Rectangle bounds) {
-        super(screen, bounds);
+    public Brick(PlayScreen screen, MapObject object) {
+        super(screen, object);
         fixture.setUserData(this);
         setCategoryFilter(ManymanGame.BRICK_BIT);
     }

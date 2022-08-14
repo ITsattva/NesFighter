@@ -1,5 +1,7 @@
 package com.manyman.game.sprites.tileobjects;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,18 +18,18 @@ import com.manyman.game.screens.PlayScreen;
 public abstract class InteractiveTileObject {
     protected World world;
     protected TiledMap map;
-    protected TiledMap tile;
     protected Rectangle bounds;
     protected Body body;
-
     protected Fixture fixture;
     protected PlayScreen screen;
+    protected MapObject object;
 
-    public InteractiveTileObject(PlayScreen screen, Rectangle bounds) {
+    public InteractiveTileObject(PlayScreen screen, MapObject object) {
+        this.object = object;
         this.screen = screen;
         this.world = screen.getWorld();
         this.map = screen.getMap();
-        this.bounds = bounds;
+        this.bounds = ((RectangleMapObject) object).getRectangle();
 
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
