@@ -27,9 +27,9 @@ public class WorldContactListener implements ContactListener {
             case ManymanGame.MARIO_HEAD_BIT | ManymanGame.BRICK_BIT:
             case ManymanGame.MARIO_HEAD_BIT | ManymanGame.COIN_BIT:
                 if (fixA.getFilterData().categoryBits == ManymanGame.MARIO_HEAD_BIT){
-                    ((InteractiveTileObject) fixB.getUserData()).onHeadHit();
+                    ((InteractiveTileObject) fixB.getUserData()).onHeadHit((Mario) fixA.getUserData());
                 } else {
-                    ((InteractiveTileObject) fixA.getUserData()).onHeadHit();
+                    ((InteractiveTileObject) fixA.getUserData()).onHeadHit((Mario) fixB.getUserData());
                 }
                 break;
             case ManymanGame.MARIO_BIT | ManymanGame.ENEMY_HEAD_BIT:

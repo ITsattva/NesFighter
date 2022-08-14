@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="39">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="46">
  <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
   <image source="tileset_gutter.png" width="594" height="504"/>
  </tileset>
@@ -10,7 +10,7 @@
  </layer>
  <layer id="2" name="graphics" width="240" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt108OwUAcxfEZ3VvYOAnugBtgYc8NcBM3w0UofTvNdBq/VGsS/X6Sl0k7f1Z9acY5ALCZD94pv6ubj60HkEa5l3XjNquuB2B3UW+uyu2L/qzUw7WyCfoY/l/DMTYPwC5Xb57K60N/7t65h5L76txBvT0qp6w6ByA9a88BAACAPhkq52D8pYXu18vIHburfUCftd2bnc7aNziv6T6gz9ruDf0FbCb63qfKzMefLegv0L1RoliNWw7wTwqjmyU7
+   eJzt100OwUAYxvGp7i1snAR3wA3Kwp4b4CZuhotQPBaimU7jTfUjaf+/5MmknY9VnzTjHADYzAffZN8VzYfWA2hHtpdF4ybOrwdgd1ZvLsr1j/4k6uFKWXt99P+v/hiaB2CXqjcP5fmjP7fIubuSRvm5vXp7UI5xfg5Ac5JA3qw9BwAAALoo8caPoXLyxiYtdL9eBu7Yde0D+qzq3mx11q7EeWX3AX1WdW/oL2Az0fc+VWZR+NmC/gL1G7UUq3HFAbrkBepxJ7g=
   </data>
  </layer>
  <objectgroup id="3" name="ground">
@@ -23,8 +23,31 @@
   <object id="35" x="896" y="128" width="32" height="64"/>
  </objectgroup>
  <objectgroup id="5" name="coins">
-  <object id="14" x="208" y="127.5" width="15.5" height="15.5"/>
+  <object id="14" x="208" y="127.5" width="15.5" height="15.5">
+   <properties>
+    <property name="mushroom" value=""/>
+   </properties>
+  </object>
   <object id="15" x="176.5" y="128.5" width="14.5" height="14.5">
+   <properties>
+    <property name="mushroom" value=""/>
+   </properties>
+  </object>
+  <object id="39" x="96" y="128" width="16" height="16"/>
+  <object id="40" x="64" y="128" width="16" height="16"/>
+  <object id="41" x="160" y="80" width="16" height="16">
+   <properties>
+    <property name="mushroom" value=""/>
+   </properties>
+  </object>
+  <object id="42" x="176" y="80" width="16" height="16"/>
+  <object id="43" x="192" y="80" width="16" height="16">
+   <properties>
+    <property name="mushroom" value=""/>
+   </properties>
+  </object>
+  <object id="44" x="208" y="80" width="16" height="16"/>
+  <object id="45" x="224" y="80" width="16" height="16">
    <properties>
     <property name="mushroom" value=""/>
    </properties>
